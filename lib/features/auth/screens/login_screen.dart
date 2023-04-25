@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jana_soz/core/constants/constants.dart';
-
+import 'package:jana_soz/core/common/sign_in_button.dart';
 
 class login_screen extends StatelessWidget {
-  const login_screen ({Key? key}) : super(key: key);
+  const login_screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,13 +12,24 @@ class login_screen extends StatelessWidget {
         title: Image.asset(
           Constants.logoPath,
           height: 40,
-        ),
+      ),
+        actions: [
+          TextButton(
+            onPressed: () => (context),
+            child: const Text(
+              'Skip',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
           const SizedBox(height: 30),
           const Text(
-            'Dive into anything',
+            'Tirkelu',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -30,10 +41,11 @@ class login_screen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
               Constants.loginEmotePath,
-              height: 400,
+              height: 300,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 50),
+          const SignInButton(),
         ],
       ),
     );

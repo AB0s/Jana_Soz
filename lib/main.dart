@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:jana_soz/theme/pallete.dart';
 import 'package:jana_soz/features/auth/screens/login_screen.dart';
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+// ...
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -14,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: Pallete.darkModeAppTheme,
-      home: login_screen()
+      home: login_screen(),
     );
   }
 }
