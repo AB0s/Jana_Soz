@@ -7,14 +7,14 @@ import 'package:jana_soz/theme/pallete.dart';
 class SignInButton extends ConsumerWidget {
   const SignInButton({Key? key}) : super(key: key);
 
-  void signInWithGoogle(WidgetRef ref) {
-    ref.read(authControllerProvider).signInWithGoogle();
+  void signInWithGoogle(BuildContext context,WidgetRef ref) {
+    ref.read(authControllerProvider.notifier).signInWithGoogle(context);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton.icon(
-      onPressed: () => signInWithGoogle(ref),
+      onPressed: () => signInWithGoogle(context, ref),
       icon: Image.asset(
         Constants.googlePath,
         width: 35,
