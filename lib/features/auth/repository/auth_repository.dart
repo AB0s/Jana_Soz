@@ -8,7 +8,6 @@ import 'package:jana_soz/core/constants/firebase_constants.dart';
 import 'package:jana_soz/core/failure.dart';
 import 'package:jana_soz/core/providers/firebase_providers.dart';
 import 'package:jana_soz/models/user_model.dart';
-
 final authRepositoryProvider = Provider((ref) => AuthRepository(
     firestore: ref.read(firestoreProvider),
     auth: ref.read(authProvider),
@@ -71,5 +70,9 @@ class AuthRepository {
   Stream<UserModel> getUserData(String uid) {
     return _users.doc(uid).snapshots().map(
         (event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
+  }
+  void logOut() async {
+    await _googleSignIn.signOut();
+    await _auth.signOut();
   }
 }
