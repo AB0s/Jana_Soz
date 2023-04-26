@@ -8,9 +8,6 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
-    void logOut(WidgetRef ref){
-      ref.read(authControllerProvider.notifier).logout();
-    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Negizgi bet'),
@@ -25,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
             icon: CircleAvatar(
               backgroundImage: NetworkImage(user.profilePic),
             ),
-            onPressed: () => logOut(ref),
+            onPressed: (){},
           )
         ],
       ),
