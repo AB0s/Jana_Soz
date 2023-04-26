@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jana_soz/core/common/error_text.dart';
 import 'package:jana_soz/core/common/loader.dart';
 import 'package:jana_soz/features/auth/controller/auth_controller.dart';
-import 'package:jana_soz/routes.dart';
+import 'package:jana_soz/models/user_model.dart';
+import 'package:jana_soz/router.dart';
 import 'package:jana_soz/theme/pallete.dart';
 import 'package:jana_soz/features/auth/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,21 +22,43 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  UserModel? userModel;
+  void getData(WidgetRef ref, User data) async {
+    userModel = await ref
+        .watch(authControllerProvider.notifier)
+        .getUserData(data.uid)
+        .first;
+    ref.read(userProvider.notifier).update((state) => userModel);
+  }
+  @override
+  Widget build(BuildContext context) {
     return ref.watch(authStateChangeProvider).when(
         data: (data) => MaterialApp.router(
-              title: 'Flutter Demo',
-              theme: Pallete.darkModeAppTheme,
-              routerDelegate: RoutemasterDelegate(
-                  routesBuilder: (context) => loggedOutRoute),
-              routeInformationParser: const RoutemasterParser(),
-            ),
+          title: 'Flutter Demo',
+          theme: Pallete.darkModeAppTheme,
+          routerDelegate: RoutemasterDelegate(
+            routesBuilder: (context) {
+              if (data != null) {
+                getData(ref, data);
+                if(userModel!=null){
+                  return loggedInRoute;
+                }
+              }
+              return loggedOutRoute;
+            },
+          ),
+          routeInformationParser: const RoutemasterParser(),
+        ),
         error: (error, stackTrace) => ErrorText(error: error.toString()),
         loading: () => const Loader());
   }
 }
+
