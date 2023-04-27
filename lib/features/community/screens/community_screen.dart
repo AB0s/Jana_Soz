@@ -82,7 +82,7 @@ class CommunityScreen extends ConsumerWidget {
                                 ),
                                 padding: const EdgeInsets.symmetric(horizontal: 25),
                               ),
-                              child: const Text('Mod Tools'),
+                              child: const Text('Mod Quraldary'),
                             )
                                 : OutlinedButton(
                               onPressed: () => joinCommunity(ref, community, context),
@@ -99,7 +99,7 @@ class CommunityScreen extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                          '${community.members.length} members',
+                          '${community.members.length} qatysushy',
                         ),
                       ),
                     ],
