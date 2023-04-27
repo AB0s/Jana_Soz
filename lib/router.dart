@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:jana_soz/features/auth/screens/login_screen.dart';
 import 'package:jana_soz/features/community/screens/community_screen.dart';
 import 'package:jana_soz/features/community/screens/create_community_screen.dart';
+import 'package:jana_soz/features/community/screens/mod_tools_screen.dart';
 import 'package:jana_soz/features/home/screens/home_screen.dart';
+import 'package:jana_soz/features/post/screens/add_post_screen.dart';
+import 'package:jana_soz/features/post/screens/add_post_type_screen.dart';
+import 'package:jana_soz/features/post/screens/comments_screen.dart';
+import 'package:jana_soz/features/user_profile/screens/edit_profile_screen.dart';
+import 'package:jana_soz/features/user_profile/screens/user_profile_screen.dart';
 import 'package:routemaster/routemaster.dart';
 
 final loggedOutRoute = RouteMap(routes: {
-  '/': (_) => const MaterialPage(child: LoginScreen()),
+  '/': (_) => const MaterialPage(child: login_screen()),
 });
 
 final loggedInRoute = RouteMap(
@@ -20,16 +26,6 @@ final loggedInRoute = RouteMap(
     ),
     '/mod-tools/:name': (routeData) => MaterialPage(
       child: ModToolsScreen(
-        name: routeData.pathParameters['name']!,
-      ),
-    ),
-    '/edit-community/:name': (routeData) => MaterialPage(
-      child: EditCommunityScreen(
-        name: routeData.pathParameters['name']!,
-      ),
-    ),
-    '/add-mods/:name': (routeData) => MaterialPage(
-      child: AddModsScreen(
         name: routeData.pathParameters['name']!,
       ),
     ),
@@ -58,3 +54,4 @@ final loggedInRoute = RouteMap(
     ),
   },
 );
+
