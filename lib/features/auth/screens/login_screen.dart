@@ -15,15 +15,16 @@ class login_screen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Image.asset(
           Constants.logoPath,
-          height: 40,
+          height: 60,
         ),
         actions: [
           TextButton(
             onPressed: () {},
             child: const Text(
-              'Skip',
+              'Qonaq retynde kiru',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -35,22 +36,21 @@ class login_screen extends ConsumerWidget {
         children: [
           const SizedBox(height: 30),
           const Text(
-            'Tirkelu',
+            'Kir de, qyzyqta',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.5,
             ),
           ),
-          const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
               Constants.loginEmotePath,
-              height: 400,
+              height: 350,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 40),
           const Responsive(child: SignInButton()),
         ],
       ),
