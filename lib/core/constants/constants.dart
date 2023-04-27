@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jana_soz/features/feed/feed_screen.dart';
 import 'package:jana_soz/features/home/screens/home_screen.dart';
-
+import 'package:jana_soz/features/post/screens/add_post_screen.dart';
 class Constants {
   static const logoPath = 'assets/images/Jana-Soz-logo.png';
   static const loginEmotePath = 'assets/images/sammy-line-team-marketing.png';
