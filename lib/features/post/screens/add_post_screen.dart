@@ -15,11 +15,14 @@ class AddPostScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    double cardHeightWidth = kIsWeb ? 360 : 120;
-    double iconSize = kIsWeb ? 120 : 60;
-    final currentTheme = ref.watch(themeNotifierProvider);
     final Size screenSize = MediaQuery.of(context).size;
     final double screenHeight = screenSize.height;
+    final double screenWidth = screenSize.width;
+    double cardHeight = kIsWeb ? 360 : 120;
+    double cardWidth = kIsWeb ? 360 : screenWidth;
+    double iconSize = kIsWeb ? 120 : 60;
+
+    final currentTheme = ref.watch(themeNotifierProvider);
     void displayDrawer(BuildContext context) {
       Scaffold.of(context).openDrawer();
     }
@@ -27,6 +30,7 @@ class AddPostScreen extends ConsumerWidget {
     void displayEndDrawer(BuildContext context) {
       Scaffold.of(context).openEndDrawer();
     }
+
     final user = ref.watch(userProvider)!;
     final isGuest = !user.isAuthenticated;
     return Scaffold(
@@ -42,7 +46,8 @@ class AddPostScreen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              showSearch(context: context, delegate: SearchCommunityDelegate(ref));
+              showSearch(
+                  context: context, delegate: SearchCommunityDelegate(ref));
             },
             icon: const Icon(Icons.search),
           ),
@@ -65,64 +70,106 @@ class AddPostScreen extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: screenHeight*0.10),
+          SizedBox(height: screenHeight * 0.05),
           GestureDetector(
             onTap: () => navigateToType(context, 'image'),
             child: SizedBox(
-              height: cardHeightWidth,
-              width: cardHeightWidth,
+              height: cardHeight,
+              width: cardWidth,
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 color: currentTheme.backgroundColor,
                 elevation: 16,
-                child: Center(
-                  child: Icon(
-                    Icons.image_outlined,
-                    size: iconSize,
+                child: Padding(
+                  padding: EdgeInsets.only(left: screenWidth * 0.05),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.image_outlined,
+                          size: iconSize,
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.15,
+                        ),
+                        const Text(
+                          "Suretpen qosu",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-          SizedBox(height: screenHeight*0.10),
+          SizedBox(height: screenHeight * 0.10),
           GestureDetector(
             onTap: () => navigateToType(context, 'text'),
             child: SizedBox(
-              height: cardHeightWidth,
-              width: cardHeightWidth,
+              height: cardHeight,
+              width: cardWidth,
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 color: currentTheme.backgroundColor,
                 elevation: 16,
-                child: Center(
-                  child: Icon(
-                    Icons.font_download_outlined,
-                    size: iconSize,
+                child: Padding(
+                  padding: EdgeInsets.only(left: screenWidth * 0.05),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.font_download_outlined,
+                          size: iconSize,
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.15,
+                        ),
+                        const Text(
+                          "Sozder gana",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-          SizedBox(height: screenHeight*0.10),
+          SizedBox(height: screenHeight * 0.10),
           GestureDetector(
             onTap: () => navigateToType(context, 'link'),
             child: SizedBox(
-              height: cardHeightWidth,
-              width: cardHeightWidth,
+              height: cardHeight,
+              width: cardWidth,
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 color: currentTheme.backgroundColor,
                 elevation: 16,
-                child: Center(
-                  child: Icon(
-                    Icons.link_outlined,
-                    size: iconSize,
+                child: Padding(
+                  padding: EdgeInsets.only(left: screenWidth * 0.05),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.link_outlined,
+                          size: iconSize,
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.15,
+                        ),
+                        const Text(
+                          "Syltemeny gana",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

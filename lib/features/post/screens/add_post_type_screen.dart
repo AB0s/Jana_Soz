@@ -86,19 +86,19 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isTypeImage = widget.type == 'image';
-    final isTypeText = widget.type == 'text';
-    final isTypeLink = widget.type == 'link';
+    final isTypeImage = widget.type == 'surety';
+    final isTypeText = widget.type == 'sozdery';
+    final isTypeLink = widget.type == 'siltemesy';
     final currentTheme = ref.watch(themeNotifierProvider);
     final isLoading = ref.watch(postControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Post ${widget.type}'),
+        title: Text('Posttyn ${widget.type}'),
         actions: [
           TextButton(
             onPressed: sharePost,
-            child: const Text('Share'),
+            child: const Text('Bolisu'),
           ),
         ],
       ),
