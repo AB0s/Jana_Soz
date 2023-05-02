@@ -73,7 +73,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           }),
         ],
       ),
-      body: Center(child: Text(user.name),),
+      body: Constants.tabWidgets[_page],
       drawer: const CommunityListDrawer(),
       endDrawer: isGuest ? null : const ProfileDrawer(),
       bottomNavigationBar: isGuest || kIsWeb

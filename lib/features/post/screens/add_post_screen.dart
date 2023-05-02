@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jana_soz/features/auth/controller/auth_controller.dart';
+import 'package:jana_soz/features/home/delegates/search_community_delegate.dart';
 import 'package:jana_soz/theme/pallete.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -16,12 +18,54 @@ class AddPostScreen extends ConsumerWidget {
     double cardHeightWidth = kIsWeb ? 360 : 120;
     double iconSize = kIsWeb ? 120 : 60;
     final currentTheme = ref.watch(themeNotifierProvider);
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenHeight = screenSize.height;
+    void displayDrawer(BuildContext context) {
+      Scaffold.of(context).openDrawer();
+    }
 
+    void displayEndDrawer(BuildContext context) {
+      Scaffold.of(context).openEndDrawer();
+    }
+    final user = ref.watch(userProvider)!;
+    final isGuest = !user.isAuthenticated;
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      appBar: AppBar(
+        title: const Text('Negizgi bet'),
+        centerTitle: false,
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => displayDrawer(context),
+          );
+        }),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: SearchCommunityDelegate(ref));
+            },
+            icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {
+              Routemaster.of(context).push('/add-post');
+            },
+            icon: const Icon(Icons.add),
+          ),
+          Builder(builder: (context) {
+            return IconButton(
+              icon: CircleAvatar(
+                backgroundImage: NetworkImage(user.profilePic),
+              ),
+              onPressed: () => displayEndDrawer(context),
+            );
+          }),
+        ],
+      ),
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: screenHeight*0.10),
           GestureDetector(
             onTap: () => navigateToType(context, 'image'),
             child: SizedBox(
@@ -42,6 +86,7 @@ class AddPostScreen extends ConsumerWidget {
               ),
             ),
           ),
+          SizedBox(height: screenHeight*0.10),
           GestureDetector(
             onTap: () => navigateToType(context, 'text'),
             child: SizedBox(
@@ -62,6 +107,7 @@ class AddPostScreen extends ConsumerWidget {
               ),
             ),
           ),
+          SizedBox(height: screenHeight*0.10),
           GestureDetector(
             onTap: () => navigateToType(context, 'link'),
             child: SizedBox(
