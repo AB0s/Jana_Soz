@@ -34,39 +34,6 @@ class AddPostScreen extends ConsumerWidget {
     final user = ref.watch(userProvider)!;
     final isGuest = !user.isAuthenticated;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Negizgi bet'),
-        centerTitle: false,
-        leading: Builder(builder: (context) {
-          return IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => displayDrawer(context),
-          );
-        }),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(
-                  context: context, delegate: SearchCommunityDelegate(ref));
-            },
-            icon: const Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {
-              Routemaster.of(context).push('/add-post');
-            },
-            icon: const Icon(Icons.add),
-          ),
-          Builder(builder: (context) {
-            return IconButton(
-              icon: CircleAvatar(
-                backgroundImage: NetworkImage(user.profilePic),
-              ),
-              onPressed: () => displayEndDrawer(context),
-            );
-          }),
-        ],
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -105,7 +72,7 @@ class AddPostScreen extends ConsumerWidget {
               ),
             ),
           ),
-          SizedBox(height: screenHeight * 0.10),
+          SizedBox(height: screenHeight * 0.07),
           GestureDetector(
             onTap: () => navigateToType(context, 'text'),
             child: SizedBox(
@@ -140,7 +107,7 @@ class AddPostScreen extends ConsumerWidget {
               ),
             ),
           ),
-          SizedBox(height: screenHeight * 0.10),
+          SizedBox(height: screenHeight * 0.07),
           GestureDetector(
             onTap: () => navigateToType(context, 'link'),
             child: SizedBox(

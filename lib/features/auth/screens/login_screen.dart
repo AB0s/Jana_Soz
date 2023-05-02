@@ -32,7 +32,9 @@ class login_screen extends ConsumerWidget {
           ),
         ],
       ),
-      body: Column(
+      body: isLoading
+          ? const Loader()
+          : Column(
         children: [
           const SizedBox(height: 30),
           const Text(

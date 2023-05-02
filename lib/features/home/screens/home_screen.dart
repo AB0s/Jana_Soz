@@ -42,7 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Negizgi bet'),
         centerTitle: false,
         leading: Builder(builder: (context) {
           return IconButton(

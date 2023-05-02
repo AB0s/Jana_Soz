@@ -33,7 +33,7 @@ class ProfileDrawer extends ConsumerWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'u/${user.name}',
+              '${user.name}',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,

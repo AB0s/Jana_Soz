@@ -57,7 +57,7 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
   }
 
   void sharePost() {
-    if (widget.type == 'image' && (bannerFile != null || bannerWebFile != null) && titleController.text.isNotEmpty) {
+    if (widget.type == 'surety' && (bannerFile != null || bannerWebFile != null) && titleController.text.isNotEmpty) {
       ref.read(postControllerProvider.notifier).shareImagePost(
         context: context,
         title: titleController.text.trim(),
@@ -65,14 +65,14 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
         file: bannerFile,
         webFile: bannerWebFile,
       );
-    } else if (widget.type == 'text' && titleController.text.isNotEmpty) {
+    } else if (widget.type == 'sozdery' && titleController.text.isNotEmpty) {
       ref.read(postControllerProvider.notifier).shareTextPost(
         context: context,
         title: titleController.text.trim(),
         selectedCommunity: selectedCommunity ?? communities[0],
         description: descriptionController.text.trim(),
       );
-    } else if (widget.type == 'link' && titleController.text.isNotEmpty && linkController.text.isNotEmpty) {
+    } else if (widget.type == 'siltemesy' && titleController.text.isNotEmpty && linkController.text.isNotEmpty) {
       ref.read(postControllerProvider.notifier).shareLinkPost(
         context: context,
         title: titleController.text.trim(),

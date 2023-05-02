@@ -56,7 +56,7 @@ class UserProfileScreen extends ConsumerWidget {
                           ),
                           padding: const EdgeInsets.symmetric(horizontal: 25),
                         ),
-                        child: const Text('Edit Profile'),
+                        child: const Text('Profile Retteu'),
                       ),
                     ),
                   ],
@@ -71,7 +71,7 @@ class UserProfileScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'u/${user.name}',
+                            '${user.name}',
                             style: const TextStyle(
                               fontSize: 19,
                               fontWeight: FontWeight.bold,
@@ -81,9 +81,9 @@ class UserProfileScreen extends ConsumerWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          '${user.karma} karma',
-                        ),
+                        //child: Text(
+                         // '${user.karma} karma',
+                        //),
                       ),
                       const SizedBox(height: 10),
                       const Divider(thickness: 2),
