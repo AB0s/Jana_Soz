@@ -95,12 +95,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       data: (user) => Scaffold(
         backgroundColor: currentTheme.backgroundColor,
         appBar: AppBar(
-          title: const Text('Edit Profile'),
+          title: const Text('Profile retteu'),
           centerTitle: false,
           actions: [
             TextButton(
               onPressed: save,
-              child: const Text('Save'),
+              child: const Text('Saqtau'),
             ),
           ],
         ),
