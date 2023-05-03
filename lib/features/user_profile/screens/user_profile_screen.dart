@@ -79,8 +79,8 @@ class UserProfileScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10),
                         //child: Text(
                          // '${user.karma} karma',
                         //),
