@@ -64,7 +64,7 @@ class CommunityScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${community.name}',
+                            'r/${community.name}',
                             style: const TextStyle(
                               fontSize: 19,
                               fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class CommunityScreen extends ConsumerWidget {
                                 ),
                                 padding: const EdgeInsets.symmetric(horizontal: 25),
                               ),
-                              child: const Text('Mod Quraldary'),
+                              child: const Text('Mod Tools'),
                             )
                                 : OutlinedButton(
                               onPressed: () => joinCommunity(ref, community, context),
@@ -99,7 +99,7 @@ class CommunityScreen extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                          '${community.members.length} qatysushy',
+                          '${community.members.length} members',
                         ),
                       ),
                     ],
@@ -108,7 +108,22 @@ class CommunityScreen extends ConsumerWidget {
               ),
             ];
           },
-          body: Text("Qawimdastyq posttary")),
+          body: ref.watch(getCommunityPostsProvider(name)).when(
+            data: (data) {
+              return ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final post = data[index];
+                  return PostCard(post: post);
+                },
+              );
+            },
+            error: (error, stackTrace) {
+              return ErrorText(error: error.toString());
+            },
+            loading: () => const Loader(),
+          ),
+        ),
         error: (error, stackTrace) => ErrorText(error: error.toString()),
         loading: () => const Loader(),
       ),

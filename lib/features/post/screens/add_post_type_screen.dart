@@ -57,7 +57,7 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
   }
 
   void sharePost() {
-    if (widget.type == 'surety' && (bannerFile != null || bannerWebFile != null) && titleController.text.isNotEmpty) {
+    if (widget.type == 'image' && (bannerFile != null || bannerWebFile != null) && titleController.text.isNotEmpty) {
       ref.read(postControllerProvider.notifier).shareImagePost(
         context: context,
         title: titleController.text.trim(),
@@ -65,14 +65,14 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
         file: bannerFile,
         webFile: bannerWebFile,
       );
-    } else if (widget.type == 'sozdery' && titleController.text.isNotEmpty) {
+    } else if (widget.type == 'text' && titleController.text.isNotEmpty) {
       ref.read(postControllerProvider.notifier).shareTextPost(
         context: context,
         title: titleController.text.trim(),
         selectedCommunity: selectedCommunity ?? communities[0],
         description: descriptionController.text.trim(),
       );
-    } else if (widget.type == 'siltemesy' && titleController.text.isNotEmpty && linkController.text.isNotEmpty) {
+    } else if (widget.type == 'link' && titleController.text.isNotEmpty && linkController.text.isNotEmpty) {
       ref.read(postControllerProvider.notifier).shareLinkPost(
         context: context,
         title: titleController.text.trim(),
@@ -86,19 +86,19 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isTypeImage = widget.type == 'surety';
-    final isTypeText = widget.type == 'sozdery';
-    final isTypeLink = widget.type == 'siltemesy';
+    final isTypeImage = widget.type == 'image';
+    final isTypeText = widget.type == 'text';
+    final isTypeLink = widget.type == 'link';
     final currentTheme = ref.watch(themeNotifierProvider);
     final isLoading = ref.watch(postControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Posttyn ${widget.type}'),
+        title: Text('Post ${widget.type}'),
         actions: [
           TextButton(
             onPressed: sharePost,
-            child: const Text('Bolisu'),
+            child: const Text('Share'),
           ),
         ],
       ),

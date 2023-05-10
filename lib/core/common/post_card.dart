@@ -50,9 +50,9 @@ class PostCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isTypeImage = post.type == 'surety';
-    final isTypeText = post.type == 'sozdery';
-    final isTypeLink = post.type == 'siltemesy';
+    final isTypeImage = post.type == 'image';
+    final isTypeText = post.type == 'text';
+    final isTypeLink = post.type == 'link';
     final user = ref.watch(userProvider)!;
     final isGuest = !user.isAuthenticated;
 
