@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jana_soz/features/auth/screens/login_screen.dart';
+import 'package:jana_soz/features/community/screens/add_mods_screen.dart';
 import 'package:jana_soz/features/community/screens/community_screen.dart';
 import 'package:jana_soz/features/community/screens/create_community_screen.dart';
+import 'package:jana_soz/features/community/screens/edit_community.dart';
 import 'package:jana_soz/features/community/screens/mod_tools_screen.dart';
 import 'package:jana_soz/features/home/screens/home_screen.dart';
 import 'package:jana_soz/features/post/screens/add_post_screen.dart';
