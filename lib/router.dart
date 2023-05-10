@@ -14,7 +14,7 @@ import 'package:jana_soz/features/user_profile/screens/user_profile_screen.dart'
 import 'package:routemaster/routemaster.dart';
 
 final loggedOutRoute = RouteMap(routes: {
-  '/': (_) => const MaterialPage(child: login_screen()),
+  '/': (_) => const MaterialPage(child: LoginScreen()),
 });
 
 final loggedInRoute = RouteMap(

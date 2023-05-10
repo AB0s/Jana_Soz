@@ -37,7 +37,7 @@ class AddPostScreen extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: screenHeight * 0.03),
+          SizedBox(height: screenHeight * 0.020),
           GestureDetector(
             onTap: () => navigateToType(context, 'image'),
             child: SizedBox(
@@ -72,7 +72,7 @@ class AddPostScreen extends ConsumerWidget {
               ),
             ),
           ),
-          SizedBox(height: screenHeight * 0.03),
+          SizedBox(height: screenHeight * 0.015),
           GestureDetector(
             onTap: () => navigateToType(context, 'text'),
             child: SizedBox(
@@ -107,7 +107,7 @@ class AddPostScreen extends ConsumerWidget {
               ),
             ),
           ),
-          SizedBox(height: screenHeight * 0.03),
+          SizedBox(height: screenHeight * 0.02),
           GestureDetector(
             onTap: () => navigateToType(context, 'link'),
             child: SizedBox(

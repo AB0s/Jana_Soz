@@ -1,25 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jana_soz/core/common/error_text.dart';
 import 'package:jana_soz/core/common/loader.dart';
 import 'package:jana_soz/features/auth/controller/auth_controller.dart';
+import 'package:jana_soz/firebase_options.dart';
 import 'package:jana_soz/models/user_model.dart';
 import 'package:jana_soz/router.dart';
 import 'package:jana_soz/theme/pallete.dart';
-import 'package:jana_soz/features/auth/screens/login_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:routemaster/routemaster.dart';
-import 'firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-// ...
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends ConsumerStatefulWidget {
@@ -31,6 +32,7 @@ class MyApp extends ConsumerStatefulWidget {
 
 class _MyAppState extends ConsumerState<MyApp> {
   UserModel? userModel;
+
   void getData(WidgetRef ref, User data) async {
     userModel = await ref
         .watch(authControllerProvider.notifier)
@@ -38,28 +40,29 @@ class _MyAppState extends ConsumerState<MyApp> {
         .first;
     ref.read(userProvider.notifier).update((state) => userModel);
   }
+
   @override
   Widget build(BuildContext context) {
     return ref.watch(authStateChangeProvider).when(
-        data: (data) => MaterialApp.router(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          theme: Pallete.darkModeAppTheme,
-          routerDelegate: RoutemasterDelegate(
-            routesBuilder: (context) {
-              if (data != null) {
-                getData(ref, data);
-                if(userModel!=null){
-                  return loggedInRoute;
-                }
+      data: (data) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'Jana Soz',
+        theme: ref.watch(themeNotifierProvider),
+        routerDelegate: RoutemasterDelegate(
+          routesBuilder: (context) {
+            if (data != null) {
+              getData(ref, data);
+              if (userModel != null) {
+                return loggedInRoute;
               }
-              return loggedOutRoute;
-            },
-          ),
-          routeInformationParser: const RoutemasterParser(),
+            }
+            return loggedOutRoute;
+          },
         ),
-        error: (error, stackTrace) => ErrorText(error: error.toString()),
-        loading: () => const Loader());
+        routeInformationParser: const RoutemasterParser(),
+      ),
+      error: (error, stackTrace) => ErrorText(error: error.toString()),
+      loading: () => const Loader(),
+    );
   }
 }
-

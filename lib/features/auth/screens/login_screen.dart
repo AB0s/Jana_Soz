@@ -6,8 +6,12 @@ import 'package:jana_soz/core/constants/constants.dart';
 import 'package:jana_soz/features/auth/controller/auth_controller.dart';
 import 'package:jana_soz/responsive/responsive.dart';
 
-class login_screen extends ConsumerWidget {
-  const login_screen({Key? key}) : super(key: key);
+class LoginScreen extends ConsumerWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  void signInAsGuest(WidgetRef ref, BuildContext context) {
+    ref.read(authControllerProvider.notifier).signInAsGuest(context);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,16 +19,15 @@ class login_screen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Image.asset(
           Constants.logoPath,
-          height: 60,
+          height: 40,
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () => signInAsGuest(ref, context),
             child: const Text(
-              'Qonaq retynde kiru',
+              'Skip',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -38,21 +41,22 @@ class login_screen extends ConsumerWidget {
         children: [
           const SizedBox(height: 30),
           const Text(
-            'Kir de, qyzyqta',
+            'Dive into anything',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.5,
             ),
           ),
+          const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
               Constants.loginEmotePath,
-              height: 350,
+              height: 200,
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           const Responsive(child: SignInButton()),
         ],
       ),

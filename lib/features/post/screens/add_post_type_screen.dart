@@ -131,7 +131,7 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
                     color: currentTheme.textTheme.bodyText2!.color!,
                     child: Container(
                       width: double.infinity,
-                      height: 150,
+                      height: 125,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                       ),
