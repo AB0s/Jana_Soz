@@ -20,18 +20,18 @@ class ModToolsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mod Tools'),
+        title: const Text('Moderator quraldary'),
       ),
       body: Column(
         children: [
           ListTile(
             leading: const Icon(Icons.add_moderator),
-            title: const Text('Add Moderators'),
+            title: const Text('Moderators qosu'),
             onTap: () => navigateToAddMods(context),
           ),
           ListTile(
             leading: const Icon(Icons.edit),
-            title: const Text('Edit Community'),
+            title: const Text('Qawimdastyq ozgertu'),
             onTap: () => navigateToModTools(context),
           ),
         ],

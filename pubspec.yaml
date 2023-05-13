@@ -42,7 +42,7 @@ dependencies:
   google_sign_in: ^6.1.0
   flutter_riverpod: ^2.3.6
   fpdart: ^0.5.0
-  routemaster: ^1.0.1
+  routemaster: '>=1.0.1 <2.0.0'
   any_link_preview: ^2.0.9
   uuid: ^3.0.6
   dotted_border: ^2.0.0+2
