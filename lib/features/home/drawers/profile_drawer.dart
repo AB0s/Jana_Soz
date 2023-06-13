@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jana_soz/features/auth/controller/auth_controller.dart';
+import 'package:jana_soz/generated/locale_keys.g.dart';
 import 'package:jana_soz/theme/pallete.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -42,20 +44,40 @@ class ProfileDrawer extends ConsumerWidget {
             const SizedBox(height: 10),
             const Divider(),
             ListTile(
-              title: const Text('My Profile'),
+              title: Text(LocaleKeys.Paraqsha.tr()),
               leading: const Icon(Icons.person),
               onTap: () => navigateToUserProfile(context, user.uid),
             ),
             ListTile(
-              title: const Text('Log Out'),
+              title: Text(LocaleKeys.Shygu.tr()),
               leading: Icon(
                 Icons.logout,
                 color: Pallete.redColor,
               ),
               onTap: () => logOut(ref),
             ),
+            ListTile(
+              title: Text('kz'),
+              leading: const Icon(Icons.language),
+              onTap: () {
+                  context.setLocale(Locale('ru'));
+              },
+            ),
+        ListTile(
+        title: Text('ru'),
+        leading: const Icon(Icons.language),
+        onTap: () {
+          context.setLocale(Locale('de'));
+        },),
+            ListTile(
+              title: Text('eng'),
+              leading: const Icon(Icons.language),
+              onTap: () {
+                context.setLocale(Locale('en'));
+              },),
             Switch.adaptive(
-              value: ref.watch(themeNotifierProvider.notifier).mode == ThemeMode.dark,
+              value: ref.watch(themeNotifierProvider.notifier).mode ==
+                  ThemeMode.dark,
               onChanged: (val) => toggleTheme(ref),
             ),
           ],

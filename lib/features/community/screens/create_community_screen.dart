@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jana_soz/core/common/loader.dart';
 import 'package:jana_soz/features/community/controller/community_controller.dart';
+import 'package:jana_soz/generated/locale_keys.g.dart';
 import 'package:jana_soz/responsive/responsive.dart';
 
 class CreateCommunityScreen extends ConsumerStatefulWidget {
@@ -33,7 +35,7 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Qauymdastyqty quru'),
+        title:  Text(LocaleKeys.QawQury.tr()),
       ),
       body: isLoading
           ? const Loader()
@@ -42,15 +44,15 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              const Align(
+               Align(
                 alignment: Alignment.topLeft,
-                child: Text('Qauymdastyq aty'),
+                child: Text(LocaleKeys.Qawat.tr()),
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: communityNameController,
-                decoration: const InputDecoration(
-                  hintText: 'Qauymdastyq aty',
+                decoration: InputDecoration(
+                  hintText: LocaleKeys.Qawat.tr(),
                   filled: true,
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.all(18),
@@ -65,9 +67,9 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     )),
-                child: const Text(
-                  'Qauymdastyqty quru',
-                  style: TextStyle(
+                child:  Text(
+                  LocaleKeys.QawQury.tr(),
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 ),

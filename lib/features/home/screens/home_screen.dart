@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:jana_soz/features/auth/controller/auth_controller.dart';
 import 'package:jana_soz/features/home/delegates/search_community_delegate.dart';
 import 'package:jana_soz/features/home/drawers/community_list_drawer.dart';
 import 'package:jana_soz/features/home/drawers/profile_drawer.dart';
+import 'package:jana_soz/generated/locale_keys.g.dart';
 import 'package:jana_soz/theme/pallete.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -39,10 +41,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final user = ref.watch(userProvider)!;
     final isGuest = !user.isAuthenticated;
     final currentTheme = ref.watch(themeNotifierProvider);
-
+    print(currentTheme.backgroundColor);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Negizgi Bet'),
+        title: Text(LocaleKeys.NegizgiBet.tr(),),
         centerTitle: false,
         leading: Builder(builder: (context) {
           return IconButton(

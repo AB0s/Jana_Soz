@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jana_soz/core/common/error_text.dart';
@@ -5,6 +6,7 @@ import 'package:jana_soz/core/common/loader.dart';
 import 'package:jana_soz/core/common/post_card.dart';
 import 'package:jana_soz/features/auth/controller/auth_controller.dart';
 import 'package:jana_soz/features/community/controller/community_controller.dart';
+import 'package:jana_soz/generated/locale_keys.g.dart';
 import 'package:jana_soz/models/community_model.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -64,7 +66,7 @@ class CommunityScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'r/${community.name}',
+                            community.name,
                             style: const TextStyle(
                               fontSize: 19,
                               fontWeight: FontWeight.bold,
@@ -99,7 +101,7 @@ class CommunityScreen extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                          '${community.members.length} qatysushy',
+                          '${community.members.length} ${LocaleKeys.Qat.tr()}',
                         ),
                       ),
                     ],
@@ -110,13 +112,18 @@ class CommunityScreen extends ConsumerWidget {
           },
           body: ref.watch(getCommunityPostsProvider(name)).when(
             data: (data) {
-              return ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final post = data[index];
-                  return PostCard(post: post);
-                },
-              );
+              if (data.isEmpty) {
+                return const Center(child:(Text("Posttar aly zhok")));
+              }
+                else {
+                return ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final post = data[index];
+                    return PostCard(post: post);
+                  },
+                );
+              }
             },
             error: (error, stackTrace) {
               return ErrorText(error: error.toString());

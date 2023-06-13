@@ -79,11 +79,11 @@ class UserProfileScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        //child: Text(
-                         // '${user.karma} karma',
-                        //),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          '${user.karma} activniy',
+                        ),
                       ),
                       const SizedBox(height: 10),
                       const Divider(thickness: 2),
@@ -93,7 +93,22 @@ class UserProfileScreen extends ConsumerWidget {
               ),
             ];
           },
-          body: Text("Profile")),
+          body: ref.watch(getUserPostsProvider(uid)).when(
+            data: (data) {
+              return ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final post = data[index];
+                  return PostCard(post: post);
+                },
+              );
+            },
+            error: (error, stackTrace) {
+              return ErrorText(error: error.toString());
+            },
+            loading: () => const Loader(),
+          ),
+        ),
         error: (error, stackTrace) => ErrorText(error: error.toString()),
         loading: () => const Loader(),
       ),

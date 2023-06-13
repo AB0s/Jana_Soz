@@ -284,7 +284,6 @@ class PostCard extends ConsumerWidget {
                                             itemCount: user.awards.length,
                                             itemBuilder: (BuildContext context, int index) {
                                               final award = user.awards[index];
-
                                               return GestureDetector(
                                                 onTap: () => awardPost(ref, award, context),
                                                 child: Padding(

@@ -65,7 +65,6 @@ class CommunityController extends StateNotifier<bool> {
       members: [uid],
       mods: [uid],
     );
-
     final res = await _communityRepository.createCommunity(community);
     state = false;
     res.fold((l) => showSnackBar(context, l.message), (r) {

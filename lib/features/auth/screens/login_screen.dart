@@ -19,6 +19,7 @@ class LoginScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Image.asset(
           Constants.logoPath,
           height: 40,
@@ -41,7 +42,7 @@ class LoginScreen extends ConsumerWidget {
         children: [
           const SizedBox(height: 30),
           const Text(
-            'Dive into anything',
+            'Kir de Qyzyqta',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,

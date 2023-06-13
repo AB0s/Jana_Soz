@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jana_soz/core/common/error_text.dart';
@@ -5,6 +6,7 @@ import 'package:jana_soz/core/common/loader.dart';
 import 'package:jana_soz/core/common/sign_in_button.dart';
 import 'package:jana_soz/features/auth/controller/auth_controller.dart';
 import 'package:jana_soz/features/community/controller/community_controller.dart';
+import 'package:jana_soz/generated/locale_keys.g.dart';
 import 'package:jana_soz/models/community_model.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -31,7 +33,7 @@ class CommunityListDrawer extends ConsumerWidget {
             isGuest
                 ? const SignInButton()
                 : ListTile(
-              title: const Text('Qauymdastyq quru'),
+              title:  Text(LocaleKeys.QawQury.tr()),
               leading: const Icon(Icons.add),
               onTap: () => navigateToCreateCommunity(context),
             ),
