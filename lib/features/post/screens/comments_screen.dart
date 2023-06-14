@@ -29,6 +29,7 @@ class _CommentsScreenState extends ConsumerState<CommentsScreen> {
     commentController.dispose();
   }
 
+  // Method to add a comment to a post
   void addComment(Post post) {
     ref.read(postControllerProvider.notifier).addComment(
       context: context,
