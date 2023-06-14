@@ -9,30 +9,40 @@ import 'package:routemaster/routemaster.dart';
 class AddPostScreen extends ConsumerWidget {
   const AddPostScreen({super.key});
 
+  // Method to navigate to a specific post type screen
   void navigateToType(BuildContext context, String type) {
     Routemaster.of(context).push('/add-post/$type');
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Get the screen size
     final Size screenSize = MediaQuery.of(context).size;
     final double screenHeight = screenSize.height;
     final double screenWidth = screenSize.width;
+    
+    // Define dimensions based on screen type
     double cardHeight = kIsWeb ? 360 : 120;
     double cardWidth = kIsWeb ? 360 : screenWidth;
     double iconSize = kIsWeb ? 120 : 60;
 
+    // Get the current theme
     final currentTheme = ref.watch(themeNotifierProvider);
+    
+    // Method to display the app drawer
     void displayDrawer(BuildContext context) {
       Scaffold.of(context).openDrawer();
     }
 
+    // Method to display the end drawer
     void displayEndDrawer(BuildContext context) {
       Scaffold.of(context).openEndDrawer();
     }
 
+    // Get the user information from the provider
     final user = ref.watch(userProvider)!;
     final isGuest = !user.isAuthenticated;
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
