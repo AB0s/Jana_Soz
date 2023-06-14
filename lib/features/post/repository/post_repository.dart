@@ -1,3 +1,4 @@
+// Import necessary packages and files
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -9,20 +10,26 @@ import 'package:jana_soz/models/comment_model.dart';
 import 'package:jana_soz/models/community_model.dart';
 import 'package:jana_soz/models/post_model.dart';
 
+// Provider for the PostRepository
 final postRepositoryProvider = Provider((ref) {
   return PostRepository(
     firestore: ref.watch(firestoreProvider),
   );
 });
 
+// Repository class for handling posts, comments, and interactions
 class PostRepository {
   final FirebaseFirestore _firestore;
+
+  // Constructor to initialize the Firestore instance
   PostRepository({required FirebaseFirestore firestore}) : _firestore = firestore;
 
+  // Get references to the Firestore collections
   CollectionReference get _posts => _firestore.collection(FirebaseConstants.postsCollection);
   CollectionReference get _comments => _firestore.collection(FirebaseConstants.commentsCollection);
   CollectionReference get _users => _firestore.collection(FirebaseConstants.usersCollection);
 
+  // Add a post to Firestore
   FutureVoid addPost(Post post) async {
     try {
       return right(_posts.doc(post.id).set(post.toMap()));
@@ -33,6 +40,7 @@ class PostRepository {
     }
   }
 
+  // Fetch user posts based on the specified communities
   Stream<List<Post>> fetchUserPosts(List<Community> communities) {
     return _posts
         .where('communityName', whereIn: communities.map((e) => e.name).toList())
@@ -49,6 +57,7 @@ class PostRepository {
     );
   }
 
+  // Fetch guest posts (latest 10)
   Stream<List<Post>> fetchGuestPosts() {
     return _posts.orderBy('createdAt', descending: true).limit(10).snapshots().map(
           (event) => event.docs
@@ -61,6 +70,7 @@ class PostRepository {
     );
   }
 
+  // Delete a post from Firestore
   FutureVoid deletePost(Post post) async {
     try {
       return right(_posts.doc(post.id).delete());
@@ -71,6 +81,7 @@ class PostRepository {
     }
   }
 
+  // Upvote a post and handle vote count updates
   void upvote(Post post, String userId) async {
     if (post.downvotes.contains(userId)) {
       _posts.doc(post.id).update({
@@ -89,6 +100,7 @@ class PostRepository {
     }
   }
 
+  // Downvote a post and handle vote count updates
   void downvote(Post post, String userId) async {
     if (post.upvotes.contains(userId)) {
       _posts.doc(post.id).update({
@@ -107,10 +119,12 @@ class PostRepository {
     }
   }
 
+  // Get a post by its ID
   Stream<Post> getPostById(String postId) {
     return _posts.doc(postId).snapshots().map((event) => Post.fromMap(event.data() as Map<String, dynamic>));
   }
 
+  // Add a comment to a post and update the comment count
   FutureVoid addComment(Comment comment) async {
     try {
       await _comments.doc(comment.id).set(comment.toMap());
@@ -125,6 +139,7 @@ class PostRepository {
     }
   }
 
+  // Get comments of a post
   Stream<List<Comment>> getCommentsOfPost(String postId) {
     return _comments.where('postId', isEqualTo: postId).orderBy('createdAt', descending: true).snapshots().map(
           (event) => event.docs
@@ -137,6 +152,7 @@ class PostRepository {
     );
   }
 
+  // Award a post and update award lists
   FutureVoid awardPost(Post post, String award, String senderId) async {
     try {
       _posts.doc(post.id).update({
