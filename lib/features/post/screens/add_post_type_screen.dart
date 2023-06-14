@@ -41,6 +41,7 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
     linkController.dispose();
   }
 
+  // Method to select a banner image
   void selectBannerImage() async {
     final res = await pickImage();
 
@@ -56,6 +57,7 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
     }
   }
 
+  // Method to share the post
   void sharePost() {
     if (widget.type == 'image' && (bannerFile != null || bannerWebFile != null) && titleController.text.isNotEmpty) {
       ref.read(postControllerProvider.notifier).shareImagePost(
