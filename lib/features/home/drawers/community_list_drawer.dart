@@ -13,10 +13,14 @@ import 'package:routemaster/routemaster.dart';
 class CommunityListDrawer extends ConsumerWidget {
   const CommunityListDrawer({super.key});
 
+  // navigateToCreateCommunity() method navigates to the create community page.
+  // It uses the Routemaster package to push the corresponding route.
   void navigateToCreateCommunity(BuildContext context) {
     Routemaster.of(context).push('/create-community');
   }
 
+  // navigateToCommunity() method navigates to the selected community when tapped.
+  // It uses the Routemaster package to push the corresponding route.
   void navigateToCommunity(BuildContext context, Community community) {
     Routemaster.of(context).push('/r/${community.name}');
   }
@@ -26,17 +30,18 @@ class CommunityListDrawer extends ConsumerWidget {
     final user = ref.watch(userProvider)!;
     final isGuest = !user.isAuthenticated;
 
+    // The drawer widget displays a column with the community list and sign-in button.
     return Drawer(
       child: SafeArea(
         child: Column(
           children: [
             isGuest
-                ? const SignInButton()
+                ? const SignInButton() // Sign-in button is displayed for guests.
                 : ListTile(
-              title:  Text(LocaleKeys.QawQury.tr()),
-              leading: const Icon(Icons.add),
-              onTap: () => navigateToCreateCommunity(context),
-            ),
+                    title:  Text(LocaleKeys.QawQury.tr()), // Create community text is displayed for authenticated users.
+                    leading: const Icon(Icons.add),
+                    onTap: () => navigateToCreateCommunity(context),
+                  ),
             if (!isGuest)
               ref.watch(userCommunitiesProvider).when(
                 data: (communities) => Expanded(
