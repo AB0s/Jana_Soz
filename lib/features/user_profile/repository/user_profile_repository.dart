@@ -10,17 +10,20 @@ import 'package:jana_soz/models/user_model.dart';
 
 import '../../../core/providers/firebase_providers.dart';
 
+// Provider for the UserProfileRepository
 final userProfileRepositoryProvider = Provider((ref) {
   return UserProfileRepository(firestore: ref.watch(firestoreProvider));
 });
 
 class UserProfileRepository {
   final FirebaseFirestore _firestore;
+
   UserProfileRepository({required FirebaseFirestore firestore}) : _firestore = firestore;
 
   CollectionReference get _users => _firestore.collection(FirebaseConstants.usersCollection);
   CollectionReference get _posts => _firestore.collection(FirebaseConstants.postsCollection);
 
+  // Edit user profile
   FutureVoid editProfile(UserModel user) async {
     try {
       return right(_users.doc(user.uid).update(user.toMap()));
@@ -31,18 +34,22 @@ class UserProfileRepository {
     }
   }
 
+  // Get user posts by UID
   Stream<List<Post>> getUserPosts(String uid) {
-    return _posts.where('uid', isEqualTo: uid).orderBy('createdAt', descending: true).snapshots().map(
-          (event) => event.docs
-          .map(
-            (e) => Post.fromMap(
-          e.data() as Map<String, dynamic>,
-        ),
-      )
-          .toList(),
-    );
+    return _posts
+        .where('uid', isEqualTo: uid)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((event) => event.docs
+            .map(
+              (e) => Post.fromMap(
+                e.data() as Map<String, dynamic>,
+              ),
+            )
+            .toList());
   }
 
+  // Update user karma
   FutureVoid updateUserKarma(UserModel user) async {
     try {
       return right(_users.doc(user.uid).update({
