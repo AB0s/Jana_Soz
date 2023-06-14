@@ -7,6 +7,7 @@ import 'package:jana_soz/features/auth/controller/auth_controller.dart';
 import 'package:jana_soz/features/user_profile/controller/user_profile_controller.dart';
 import 'package:routemaster/routemaster.dart';
 
+// UserProfileScreen widget
 class UserProfileScreen extends ConsumerWidget {
   final String uid;
   const UserProfileScreen({
@@ -14,6 +15,7 @@ class UserProfileScreen extends ConsumerWidget {
     required this.uid,
   });
 
+  // Navigate to the edit user screen
   void navigateToEditUser(BuildContext context) {
     Routemaster.of(context).push('/edit-profile/$uid');
   }
