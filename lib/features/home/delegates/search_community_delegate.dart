@@ -9,6 +9,8 @@ class SearchCommunityDelegate extends SearchDelegate {
   final WidgetRef ref;
   SearchCommunityDelegate(this.ref);
 
+  // buildActions() method builds the actions for the search delegate.
+  // In this case, it adds a clear button to clear the search query.
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -21,16 +23,23 @@ class SearchCommunityDelegate extends SearchDelegate {
     ];
   }
 
+  // buildLeading() method builds the leading widget of the search delegate.
+  // In this case, it returns null, indicating there is no leading widget.
   @override
   Widget? buildLeading(BuildContext context) {
     return null;
   }
 
+  // buildResults() method builds the widget that displays the search results.
+  // In this case, it returns an empty SizedBox, indicating no results to display.
   @override
   Widget buildResults(BuildContext context) {
     return const SizedBox();
   }
 
+  // buildSuggestions() method builds the widget that displays search suggestions.
+  // It uses the searchCommunityProvider to fetch and display communities based on the query.
+  // The result can be in three states: data, error, or loading.
   @override
   Widget buildSuggestions(BuildContext context) {
     return ref.watch(searchCommunityProvider(query)).when(
@@ -54,6 +63,8 @@ class SearchCommunityDelegate extends SearchDelegate {
     );
   }
 
+  // navigateToCommunity() method navigates to the selected community when tapped.
+  // It uses the Routemaster package to push the corresponding route.
   void navigateToCommunity(BuildContext context, String communityName) {
     Routemaster.of(context).push('/r/$communityName');
   }
