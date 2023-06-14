@@ -9,14 +9,20 @@ import 'package:routemaster/routemaster.dart';
 class ProfileDrawer extends ConsumerWidget {
   const ProfileDrawer({super.key});
 
+  // logOut() method triggers the logout functionality when the logout button is tapped.
+  // It uses the authControllerProvider to access the auth controller and call the logout method.
   void logOut(WidgetRef ref) {
     ref.read(authControllerProvider.notifier).logout();
   }
 
+  // navigateToUserProfile() method navigates to the user profile page when tapped.
+  // It uses the Routemaster package to push the corresponding route.
   void navigateToUserProfile(BuildContext context, String uid) {
     Routemaster.of(context).push('/u/$uid');
   }
 
+  // toggleTheme() method toggles the app theme between light and dark when the switch is changed.
+  // It uses the themeNotifierProvider to access the theme notifier and call the toggleTheme method.
   void toggleTheme(WidgetRef ref) {
     ref.read(themeNotifierProvider.notifier).toggleTheme();
   }
@@ -25,6 +31,7 @@ class ProfileDrawer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
 
+    // The drawer widget displays the user's profile information, options, and settings.
     return Drawer(
       child: SafeArea(
         child: Column(
@@ -44,12 +51,12 @@ class ProfileDrawer extends ConsumerWidget {
             const SizedBox(height: 10),
             const Divider(),
             ListTile(
-              title: Text(LocaleKeys.Paraqsha.tr()),
+              title: Text(LocaleKeys.Paraqsha.tr()), // User profile option
               leading: const Icon(Icons.person),
               onTap: () => navigateToUserProfile(context, user.uid),
             ),
             ListTile(
-              title: Text(LocaleKeys.Shygu.tr()),
+              title: Text(LocaleKeys.Shygu.tr()), // Logout option
               leading: Icon(
                 Icons.logout,
                 color: Pallete.redColor,
@@ -57,27 +64,29 @@ class ProfileDrawer extends ConsumerWidget {
               onTap: () => logOut(ref),
             ),
             ListTile(
-              title: Text('kz'),
+              title: Text('kz'), // Language option
               leading: const Icon(Icons.language),
               onTap: () {
-                  context.setLocale(Locale('ru'));
+                context.setLocale(Locale('ru'));
               },
             ),
-        ListTile(
-        title: Text('ru'),
-        leading: const Icon(Icons.language),
-        onTap: () {
-          context.setLocale(Locale('de'));
-        },),
             ListTile(
-              title: Text('eng'),
+              title: Text('ru'), // Language option
+              leading: const Icon(Icons.language),
+              onTap: () {
+                context.setLocale(Locale('de'));
+              },
+            ),
+            ListTile(
+              title: Text('eng'), // Language option
               leading: const Icon(Icons.language),
               onTap: () {
                 context.setLocale(Locale('en'));
-              },),
+              },
+            ),
             Switch.adaptive(
               value: ref.watch(themeNotifierProvider.notifier).mode ==
-                  ThemeMode.dark,
+                  ThemeMode.dark, // Dark mode switch
               onChanged: (val) => toggleTheme(ref),
             ),
           ],
