@@ -21,6 +21,7 @@ class CommentCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Comment header section
             Row(
               children: [
                 CircleAvatar(
@@ -48,6 +49,7 @@ class CommentCard extends ConsumerWidget {
                 ),
               ],
             ),
+            // Reply section
             Row(
               children: [
                 IconButton(
