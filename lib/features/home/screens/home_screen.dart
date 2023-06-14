@@ -22,14 +22,17 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _page = 0;
 
+  // displayDrawer() method opens the main drawer when the menu button is tapped.
   void displayDrawer(BuildContext context) {
     Scaffold.of(context).openDrawer();
   }
 
+  // displayEndDrawer() method opens the profile drawer when the user avatar button is tapped.
   void displayEndDrawer(BuildContext context) {
     Scaffold.of(context).openEndDrawer();
   }
 
+  // onPageChanged() method updates the current page index when the bottom navigation bar item is tapped.
   void onPageChanged(int page) {
     setState(() {
       _page = page;
@@ -41,10 +44,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final user = ref.watch(userProvider)!;
     final isGuest = !user.isAuthenticated;
     final currentTheme = ref.watch(themeNotifierProvider);
-    print(currentTheme.backgroundColor);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(LocaleKeys.NegizgiBet.tr(),),
+        title: Text(LocaleKeys.NegizgiBet.tr()),
         centerTitle: false,
         leading: Builder(builder: (context) {
           return IconButton(
@@ -75,27 +78,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           }),
         ],
       ),
-      body: Constants.tabWidgets[_page],
-      drawer: const CommunityListDrawer(),
-      endDrawer: isGuest ? null : const ProfileDrawer(),
+      body: Constants.tabWidgets[_page], // The body displays the content of the selected tab.
+      drawer: const CommunityListDrawer(), // The main drawer widget.
+      endDrawer: isGuest ? null : const ProfileDrawer(), // The profile drawer widget (only shown when the user is authenticated).
       bottomNavigationBar: isGuest || kIsWeb
           ? null
           : CupertinoTabBar(
-        activeColor: currentTheme.iconTheme.color,
-        backgroundColor: currentTheme.backgroundColor,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: '',
-          ),
-        ],
-        onTap: onPageChanged,
-        currentIndex: _page,
-      ),
+              activeColor: currentTheme.iconTheme.color,
+              backgroundColor: currentTheme.backgroundColor,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.add),
+                  label: '',
+                ),
+              ],
+              onTap: onPageChanged,
+              currentIndex: _page,
+            ),
     );
   }
 }
