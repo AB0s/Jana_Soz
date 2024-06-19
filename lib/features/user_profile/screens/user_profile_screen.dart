@@ -7,7 +7,6 @@ import 'package:jana_soz/features/auth/controller/auth_controller.dart';
 import 'package:jana_soz/features/user_profile/controller/user_profile_controller.dart';
 import 'package:routemaster/routemaster.dart';
 
-// UserProfileScreen widget
 class UserProfileScreen extends ConsumerWidget {
   final String uid;
   const UserProfileScreen({
@@ -15,7 +14,6 @@ class UserProfileScreen extends ConsumerWidget {
     required this.uid,
   });
 
-  // Navigate to the edit user screen
   void navigateToEditUser(BuildContext context) {
     Routemaster.of(context).push('/edit-profile/$uid');
   }
@@ -58,7 +56,7 @@ class UserProfileScreen extends ConsumerWidget {
                           ),
                           padding: const EdgeInsets.symmetric(horizontal: 25),
                         ),
-                        child: const Text('Profile Retteu'),
+                        child: const Text('Edit Profile'),
                       ),
                     ),
                   ],
@@ -73,7 +71,7 @@ class UserProfileScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            user.name,
+                            'u/${user.name}',
                             style: const TextStyle(
                               fontSize: 19,
                               fontWeight: FontWeight.bold,
@@ -84,7 +82,7 @@ class UserProfileScreen extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                          '${user.karma} activniy',
+                          '${user.karma} karma',
                         ),
                       ),
                       const SizedBox(height: 10),
